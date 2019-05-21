@@ -20,14 +20,14 @@ __global__ void cal_pi(float *sum, int nbin, float step, int nthreads, int nbloc
 	}
 }
 
-void cal_pi_h(float *sum, float step) {
+/*void cal_pi_h(float *sum, float step) {
     int i;
     float x;
     for (i=1;i<= num_steps; i++){
         x = (i-0.5)*step;
         sum = sum + 4.0/(1.0+x*x);
     }
-}
+}*/
 
 // Main routine that executes on the host
 int main(void) {
@@ -56,7 +56,7 @@ int main(void) {
 
     clock_t start_h=clock();
 	// Do calculation on device
-    cal_pi_h(sumCPU,step);
+    //cal_pi_h(sumCPU,step);
     clock_t end_h = clock();
 
     //Time computing
