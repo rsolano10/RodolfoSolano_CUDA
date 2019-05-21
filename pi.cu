@@ -5,7 +5,7 @@
 #define NBIN  10000000  // Number of bins
 #define NUM_BLOCK   13  // Number of thread blocks
 #define NUM_THREAD 192  // Number of threads per block
-static long num_steps = 10000000;
+#define NUM_STEPS = 10000000;
 int tid;
 float pi = 0;
 
@@ -19,15 +19,6 @@ __global__ void cal_pi(float *sum, int nbin, float step, int nthreads, int nbloc
 		sum[idx] += 4.0/(1.0+x*x);
 	}
 }
-
-/*void cal_pi_h(float *sum, float step) {
-    int i;
-    float x;
-    for (i=1;i<= num_steps; i++){
-        x = (i-0.5)*step;
-        sum = sum + 4.0/(1.0+x*x);
-    }
-}*/
 
 // Main routine that executes on the host
 int main(void) {
@@ -57,6 +48,12 @@ int main(void) {
     clock_t start_h=clock();
 	// Do calculation on device
     //cal_pi_h(sumCPU,step);
+    int i_h;
+    float x_h;
+    for (i_h=1;i<= NUM_STEPS; i_h++){
+        x_h = (i-0.5)*step;
+        sumCPU = sumCPU + 4.0/(1.0+x*x);
+    }
     clock_t end_h = clock();
 
     //Time computing
