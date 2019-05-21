@@ -19,15 +19,6 @@ __global__ void cal_pi(float *sum, int nbin, float step, int nthreads, int nbloc
 	}
 }
 
-/*void cal_pi_h(float *sum, int nbin, float step) {
-    int i;
-    float x;
-    for (i=1;i<= nbin; i++){
-        x = (i+0.5)*step;
-        sum[i] += 4.0/(1.0+x*x);
-    }
-}*/
-
 // Main routine that executes on the host
 int main(void) {
 	dim3 dimGrid(NUM_BLOCK,1,1);  // Grid dimensions
@@ -53,17 +44,11 @@ int main(void) {
     pi *= step;
 
 
-    clock_t start_h=clock();
-	// Do calculation on device
-    //cal_pi_h(sumCPU,NBIN,step);
-    clock_t end_h = clock();
-
     //Time computing
     double time_d = (double)(end_d-start_d)/CLOCKS_PER_SEC;
-    double time_h = (double)(end_h-start_h)/CLOCKS_PER_SEC;
 
 	// Print results
-    printf("PI = %f \t GPU time = %fs \t CPU time = %fs\n", pi, time_d, time_h);
+    printf("PI = %f \t GPU time = %fs \n", pi, time_d);
 
 	// Cleanup
 	free(sumHost); 
