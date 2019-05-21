@@ -50,9 +50,9 @@ int main(void) {
     //cal_pi_h(sumCPU,step);
     int i_h;
     float x_h;
-    for (i_h=1;i<= NUM_STEPS; i_h++){
-        x_h = (i-0.5)*step;
-        sumCPU = sumCPU + 4.0/(1.0+x*x);
+    for (i_h=1;i_h<= NUM_STEPS; i_h++){
+        x_h = (i_h-0.5)*step;
+        sumCPU = sumCPU + 4.0/(1.0+x_h*x_h);
     }
     clock_t end_h = clock();
 
